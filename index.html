@@ -1,9 +1,121 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+
+    <title>SwiftCart</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://kit.fontawesome.com/8584240c12.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              arimo: ["Arimo", "sans-serif"],
+              exo: ['"Exo 2"', "sans-serif"],
+              work: ['"Work Sans"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
   </head>
-  <body></body>
+  <body class="bg-base-100 font-arimo">
+    <div class="mx-auto container">
+      <div class="navbar bg-base-100 shadow-sm">
+        <div class="navbar-start">
+          <a class="btn btn-ghost text-2xl font-bold text-purple-800"
+            >SwiftCard</a
+          >
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+          <ul class="menu menu-horizontal px-1">
+            <li><a class="text-purple-800 text-xl font-bold">Home</a></li>
+            <li><a class="text-xl font-semi-bold">Products</a></li>
+            <li><a class="text-xl font-semi-bold">About</a></li>
+            <li><a class="text-xl font-semi-bold">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="navbar-end">
+          <div class="dropdown dropdown-end">
+            <a class="btn">
+              <i class="fa-solid fa-cart-shopping text-xl lg:text-2xl"></i>
+            </a>
+            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+
+            <ul
+              tabindex="-1"
+              class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            >
+              <li><a class="text-purple-800 text-xl font-bold">Home</a></li>
+              <li><a class="text-xl font-semi-bold">Products</a></li>
+              <li><a class="text-xl font-semi-bold">About</a></li>
+              <li><a class="text-xl font-semi-bold">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section
+      class="hero min-h-[70vh] relative"
+      style="background-image: url('./assets/banner-image.png')"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-70"
+      ></div>
+
+      <div class="hero-overlay bg-black bg-opacity-40"></div>
+
+      <div class="hero-content text-white w-full">
+        <div class="max-w-8xl w-full text-left pl-8 lg:pl-16">
+          <h1 class="text-6xl font-bold">Best Collection For You</h1>
+          <p class="text-xl py-6 max-w-2xl">
+            Discover the latest trends in fashion, electronics and more. Shop
+            with confidence and style at SwiftCart.
+          </p>
+          <a href="#products" class="btn btn-primary lg:text-xl px-7 py-6"
+            >Shop Now</a
+          >
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
