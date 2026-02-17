@@ -39,7 +39,7 @@
       <div class="navbar bg-base-100 shadow-sm">
         <div class="navbar-start">
           <a class="btn btn-ghost text-2xl font-bold text-purple-800"
-            >SwiftCard</a
+            >SwiftCart</a
           >
         </div>
 
@@ -56,6 +56,11 @@
           <div class="dropdown dropdown-end">
             <a class="btn">
               <i class="fa-solid fa-cart-shopping text-xl lg:text-2xl"></i>
+              <span
+                id="cartCount"
+                class="badge badge-primary badge-sm absolute -top-2 -right-2"
+                >0</span
+              >
             </a>
             <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
               <svg
@@ -105,8 +110,8 @@
             Discover the latest trends in fashion, electronics and more. Shop
             with confidence and style at SwiftCart.
           </p>
-          <a href="#products" class="btn btn-primary lg:text-xl px-7 py-6"
-            >Shop Now</a
+          <button class="btn bg-purple-700 hover:bg-purple-800 border-none text-white lg:text-xl px-7 py-6" onclick="showAllProducts()"
+            >Shop Now</button
           >
         </div>
       </div>
@@ -119,8 +124,8 @@
           We provide the best shopping experience with top-notch services.
         </p>
 
-        <div class="grid md:grid-cols-4 gap-6 my-5 px-4">
-          <div class="card bg-slate-200 shadow">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-5 px-4 justify-items-start">
+          <div class="card bg-slate-200 shadow-xl shadow">
             <div class="card-body flex items-start gap-4">
               <div class="text-2xl text-primary">
                 <i class="fa-solid fa-truck"></i>
@@ -137,7 +142,7 @@
             </div>
           </div>
 
-          <div class="card bg-slate-200 shadow px-4">
+          <div class="card bg-slate-200 shadow-xl px-4">
             <div class="card-body flex items-start gap-4">
               <div class="text-2xl text-primary">
                 <i class="fa-solid fa-headset"></i>
@@ -153,7 +158,7 @@
             </div>
           </div>
 
-          <div class="card bg-slate-200 shadow">
+          <div class="card bg-slate-200 shadow-xl">
             <div class="card-body flex items-start gap-4">
               <div class="text-2xl text-primary">
                 <i class="fa-solid fa-shield-halved"></i>
@@ -170,7 +175,7 @@
             </div>
           </div>
 
-          <div class="card bg-slate-200 shadow px-4">
+          <div class="card bg-slate-200 shadow-xl px-4">
             <div class="card-body flex items-start gap-4">
               <div class="text-2xl text-primary">
                 <i class="fa-solid fa-rotate-left"></i>
@@ -190,26 +195,22 @@
     </section>
     <section class="px-6 pb-16 max-w-7xl mx-auto">
       <h2 class="text-2xl font-bold mb-6">Trending Now</h2>
-      <div id="trendingGrid" class="grid md:grid-cols-3 gap-6"></div>
+      <div id="trending" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center"></div>
     </section>
-    <section id="products" class="px-6 pb-16">
+    <section id="products" class="card px-6 pb-16 max-w-7xl mx-auto hidden">
       <h2 class="text-3xl font-bold text-center mb-6">Our Products</h2>
 
-      <div
-        id="categoryWrap"
-        class="flex flex-wrap justify-center gap-3 mb-6"
-      ></div>
+      <div id="category" class="flex flex-wrap justify-center gap-3 mb-6"></div>
 
       <div id="loader" class="text-center hidden">
         <span class="loading loading-spinner loading-lg text-primary"></span>
       </div>
 
-      <div id="productGrid" class="grid md:grid-cols-4 gap-6"></div>
+      <div id="product" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-start"></div>
     </section>
     <footer class="bg-[#1a2332] text-gray-300 mt-16">
       <div class="max-w-7xl mx-auto px-6 py-12">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <!-- Brand Section -->
           <div>
             <h2 class="text-2xl font-bold text-indigo-400 mb-4">SwiftCart</h2>
             <p class="text-gray-400 text-sm leading-relaxed">
@@ -218,7 +219,6 @@
             </p>
           </div>
 
-          <!-- Quick Links -->
           <div>
             <h6
               class="text-gray-200 font-semibold mb-4 uppercase tracking-wider text-sm"
@@ -249,7 +249,6 @@
             </nav>
           </div>
 
-          <!-- Support -->
           <div>
             <h6
               class="text-gray-200 font-semibold mb-4 uppercase tracking-wider text-sm"
@@ -280,7 +279,6 @@
             </nav>
           </div>
 
-          <!-- Newsletter -->
           <div>
             <h6
               class="text-gray-200 font-semibold mb-4 uppercase tracking-wider text-sm"
@@ -305,12 +303,11 @@
                 Subscribe
               </button>
             </form>
-            <p id="newsletterMsg" class="text-sm mt-2"></p>
+            <p id="newsletterMessage" class="text-sm mt-2"></p>
           </div>
         </div>
       </div>
 
-      <!-- Bottom Section -->
       <div class="border-t border-gray-700 bg-[#151d2b]">
         <div
           class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4"
@@ -319,7 +316,6 @@
             © 2025 SwiftCart, Inc. All rights reserved.
           </p>
 
-          <!-- Social Icons -->
           <div class="flex gap-4 text-gray-400">
             <a href="#" class="hover:text-white transition-colors">
               <i class="fa-brands fa-facebook text-xl"></i>
@@ -344,8 +340,8 @@
     <dialog id="productModal" class="modal">
       <div class="modal-box">
         <h3 id="modalTitle" class="font-bold text-lg"></h3>
-        <img id="modalImg" class="w-40 mx-auto my-4" />
-        <p id="modalDesc"></p>
+        <img id="modalImage" class="w-40 mx-auto my-4" />
+        <p id="modalDescription"></p>
         <p class="mt-2"><b>Price:</b> <span id="modalPrice"></span></p>
         <p><b>Rating:</b> <span id="modalRating"></span></p>
 
