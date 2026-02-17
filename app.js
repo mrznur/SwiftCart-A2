@@ -61,7 +61,7 @@ function renderTrending(products) {
   </figure>
   <div class="px-3 sm:px-4 py-2 sm:py-3 flex-1 flex flex-col justify-between">
     <div class="flex justify-between items-center w-full gap-2">
-      <span class="badge badge-primary font-semibold text-xs sm:text-sm uppercase tracking-wider">\$${prod.category}</span>
+      <span class="badge badge-primary font-semibold text-xs sm:text-sm uppercase tracking-wider">${prod.category}</span>
       <p class="flex items-center gap-1 font-medium text-xs sm:text-sm">
         <i class="fa-solid fa-star text-yellow-400"></i> 
         <span class="font-semibold">${prod.rating.rate}</span>
@@ -70,7 +70,7 @@ function renderTrending(products) {
     </div>
     <h2 class="text-base sm:text-lg font-semibold leading-snug mt-2 text-gray-800">${shortTitle(prod.title, 35)}</h2>
     <div class="flex justify-between items-center w-full mt-2">
-      <p class="font-bold text-xl sm:text-2xl text-black">\$${prod.price}</p>
+      <p class="font-bold text-xl sm:text-2xl text-black">${prod.price}</p>
     </div>
     <div class="border-t border-gray-300 my-2 sm:my-3"></div>
     <div class="flex gap-2 w-full">
@@ -99,7 +99,7 @@ function renderProducts(products) {
       </figure>
       <div class="px-3 sm:px-4 py-2 sm:py-3 flex-1 flex flex-col justify-between">
         <div class="flex justify-between items-center w-full gap-2">
-          <span class="badge badge-primary font-semibold text-xs sm:text-sm uppercase tracking-wider">#${prod.category}</span>
+          <span class="badge badge-primary font-semibold text-xs sm:text-sm uppercase tracking-wider">${prod.category}</span>
           <p class="flex items-center gap-1 font-medium text-xs sm:text-sm">
             <i class="fa-solid fa-star text-yellow-400"></i> 
             <span class="font-semibold">${prod.rating.rate}</span>
