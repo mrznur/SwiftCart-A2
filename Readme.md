@@ -1,226 +1,139 @@
-# JavaScript প্রশ্নোত্তর
+১) null এবং undefined এর পার্থক্য
 
-এই ফাইলটিতে JavaScript সম্পর্কিত গুরুত্বপূর্ণ প্রশ্নগুলির উত্তর বাংলায় দেওয়া হয়েছে।
+JavaScript এ undefined আর null দেখতে একই রকম মনে হলেও আসলে এক জিনিস না।
 
----
+যখন কোনো ভেরিয়েবল declare করা হয় কিন্তু কোনো মান দেওয়া হয় না, তখন সেটার মান থাকে undefined। এটা JavaScript নিজে থেকে সেট করে।
 
-## ১) null এবং undefined এর মধ্যে পার্থক্য
+let a;
+console.log(a); // undefined
 
-### null
-- **সংজ্ঞা**: null ইঙ্গিত করে যে কোনো মূল্য নেই।
-- **প্রকার**: null একটি object হিসাবে বিবেচিত হয়।
-- **ব্যবহার**: ডেভেলপার দ্বারা স্পষ্টভাবে একটি ভেরিয়েবলে null assign করা হয়।
-- **উদাহরণ**:
-```javascript
-let x = null;
-console.log(typeof x);
-```
 
-### undefined
-- **সংজ্ঞা**: মানে একটি ভেরিয়েবল declare করা হয়েছে কিন্তু এর কোনো মূল্য assign করা হয়নি।
-- **প্রকার**: undefined নিজেই একটি প্রকার।
-- **ব্যবহার**: JavaScript স্বয়ংক্রিয়ভাবে undefined assign করে যখন কোনো মূল্য নির্দিষ্ট করা হয় না।
-- **উদাহরণ**:
-```javascript
-let y;
-console.log(y);
-console.log(typeof y);
-```
+অন্যদিকে null আমরা নিজেরা দিই। যখন আমরা ইচ্ছা করে বলি এই ভেরিয়েবলের কোনো মান নেই, তখন null ব্যবহার করি।
 
-### মূল পার্থক্য
-| বিষয় | null | undefined |
-|------|------|-----------|
-| অর্থ | intentional - মূল্য নেই | unintentional - মূল্য assign করা হয়নি |
-| কে assign করে | ডেভেলপার | JavaScript |
-| প্রকার | object | undefined |
-| তুলনা | `null == undefined` → true | `null === undefined` → false |
+let b = null;
+console.log(b); // null
 
----
 
-## ২) JavaScript এ map() ফাংশনের ব্যবহার এবং forEach() এর সাথে পার্থক্য
+সহজভাবে বললে:
 
-### map() ফাংশন
-- **ব্যবহার**: একটি array এর প্রতিটি element এর উপর একটি ফাংশন প্রয়োগ করে এবং একটি নতুন array রিটার্ন করে।
-- **Return value**: নতুন array রিটার্ন করে।
-- **পরিবর্তন**: Original array পরিবর্তন করে না।
-- **উদাহরণ**:
-```javascript
-const numbers = [1, 2, 3, 4];
-const doubled = numbers.map(num => num * 2);
-console.log(doubled); // [2, 4, 6, 8]
-```
+undefined মানে এখনো মান দেওয়া হয়নি
 
-### forEach() ফাংশন
-- **ব্যবহার**: একটি array এর প্রতিটি element এর উপর একটি ফাংশন প্রয়োগ করে কিন্তু কিছু রিটার্ন করে না।
-- **Return value**: undefined রিটার্ন করে।
-- **পরিবর্তন**: শুধুমাত্র side effects এর জন্য ব্যবহৃত হয়।
-- **উদাহরণ**:
-```javascript
-const numbers = [1, 2, 3, 4];
-numbers.forEach(num => console.log(num * 2));
-// 2, 4, 6, 8 প্রিন্ট হয়
-```
+null মানে ইচ্ছা করে খালি রাখা হয়েছে
 
-### মূল পার্থক্য
-| বিষয় | map() | forEach() |
-|------|-------|-----------|
-| Return value | নতুন array | undefined |
-| ব্যবহার | ডেটা transform করতে | শুধু iteration এর জন্য |
-| Chainable | হ্যাঁ | না |
-| Performance | foreach এর চেয়ে একটু slow | একটু দ্রুত |
+আর একটা জিনিস খেয়াল করার মতো —
+null == undefined true দেয়
+কিন্তু null === undefined false দেয়
 
----
+২) map() এবং forEach() এর পার্থক্য
 
-## ৩) == এবং === এর মধ্যে পার্থক্য
+দুটোই array নিয়ে কাজ করে, কিন্তু কাজের ধরন আলাদা।
 
-### == (Loose Equality)
-- **নাম**: Loose comparison বা Abstract equality।
-- **কাজ**: দুটি মূল্য তুলনা করে type coercion করার পরে।
-- **অর্থ**: মূল্য সমান কিনা তা চেক করে, প্রকার পরিবর্তন করে যদি প্রয়োজন।
-- **উদাহরণ**:
-```javascript
-console.log(5 == "5");    // true (string কে number এ রূপান্তরিত করা হয়)
-console.log(null == undefined); // true
-console.log(0 == false);   // true
-```
+map() ব্যবহার করলে প্রতিটি element এর উপর কাজ হয় এবং শেষে একটি নতুন array পাওয়া যায়।
 
-### === (Strict Equality)
-- **নাম**: Strict comparison বা Identical equality।
-- **কাজ**: দুটি মূল্য এবং তাদের প্রকার সঠিকভাবে তুলনা করে।
-- **অর্থ**: মূল্য এবং প্রকার উভয়ই একই হতে হবে।
-- **উদাহরণ**:
-```javascript
-console.log(5 === "5");    // false (বিভিন্ন প্রকার)
-console.log(null === undefined); // false
-console.log(0 === false);   // false
-```
+let nums = [1, 2, 3];
+let result = nums.map(n => n * 2);
+console.log(result); // [2, 4, 6]
 
-### সুপারিশ
-- **সর্বদা ===  ব্যবহার করুন** কারণ এটি আরও predictable এবং আরও নিরাপদ।
-- == ব্যবহার করলে অপ্রত্যাশিত ফলাফল হতে পারে।
 
----
+এখানে original array বদলায় না, নতুন array তৈরি হয়।
 
-## ৪) API ডেটা ফেচ করার সময় async/await এর গুরুত্ব
+forEach() ও প্রতিটি element এর উপর কাজ করে, কিন্তু এটি কিছু return করে না। শুধু loop চালায়।
 
-### async/await কী?
-- **async**: একটি ফাংশন কে declare করে যা asynchronous কাজ করে এবং একটি Promise রিটার্ন করে।
-- **await**: Promise resolve হওয়ার জন্য অপেক্ষা করে এবং তারপর result রিটার্ন করে।
+let nums = [1, 2, 3];
+nums.forEach(n => console.log(n * 2));
 
-### API ডেটা ফেচিং এ গুরুত্ব
 
-1. **Cleaner Code**: Promise chaining এর পরিবর্তে synchronous এর মতো কোড লেখা যায়।
+পার্থক্য সহজভাবে:
 
-```javascript
-// বিনা async/await (Promise chaining)
-fetch('/api/data')
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
+map → নতুন array দেয়
 
-// async/await সহ
+forEach → শুধু কাজ করে, কিছু দেয় না
+
+৩) == এবং === এর পার্থক্য
+
+== আর === দুইটাই comparison operator, কিন্তু একভাবে কাজ করে না।
+
+== শুধু মান তুলনা করে। দরকার হলে type convert করে নেয়।
+
+console.log(5 == "5"); // true
+
+
+এখানে string "5" কে number 5 বানিয়ে তুলনা করেছে।
+
+কিন্তু === মান আর type দুইটাই দেখে।
+
+console.log(5 === "5"); // false
+
+
+কারণ একটার type number, আরেকটা string।
+
+সাধারণভাবে === ব্যবহার করাই ভালো, কারণ এতে ভুল হওয়ার সম্ভাবনা কম।
+
+৪) async/await কেন দরকার API fetch করার সময়
+
+API থেকে ডেটা আনা asynchronous কাজ। মানে সাথে সাথে ডেটা পাওয়া যায় না, কিছু সময় লাগে।
+
+আগে .then() দিয়ে promise handle করা হতো। কিন্তু কোড অনেক সময় জটিল হয়ে যেত।
+
+async/await ব্যবহার করলে কোড অনেক সহজ আর readable হয়।
+
 async function getData() {
-  try {
-    const response = await fetch('/api/data');
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
+  const response = await fetch('/api/data');
+  const data = await response.json();
+  console.log(data);
 }
-```
 
-2. **Better Error Handling**: try/catch ব্যবহার করে সহজেই error handle করা যায়।
 
-3. **Sequential Operations**: একাধিক API calls ক্রমানুসারে করা সহজ।
+এখানে await না দিলে ডেটা পাওয়ার আগেই পরের লাইন চলে যেত।
 
-```javascript
-async function getMultipleData() {
-  const user = await fetch('/api/user');
-  const posts = await fetch('/api/posts');
-  const comments = await fetch('/api/comments');
-  // সব data একসাথে পাওয়া যাবে
-}
-```
+এটার সুবিধা হলো:
 
-4. **Readability**: কোড পড়া এবং বোঝা আরও সহজ।
+কোড দেখতে synchronous এর মতো লাগে
 
----
+বুঝতে সহজ
 
-## ৫) JavaScript এ Scope এর ধারণা
+try/catch দিয়ে সহজে error handle করা যায়
 
-### Scope কী?
-Scope হল একটি স্থান যেখানে একটি ভেরিয়েবল access করা যায়।
+৫) Scope কী?
 
-### তিন ধরনের Scope
+Scope মানে হলো কোনো ভেরিয়েবল কোথায় ব্যবহার করা যাবে।
 
-#### A. Global Scope (গ্লোবাল স্কোপ)
-- **সংজ্ঞা**: যা কোনো function বা block এর বাইরে declare করা হয়।
-- **অ্যাক্সেস**: সর্বত্র access করা যায়।
-- **উদাহরণ**:
-```javascript
-const globalVar = "আমি global";
+তিন ধরনের scope আছে।
+
+Global Scope
+
+যদি কোনো ভেরিয়েবল function এর বাইরে declare করা হয়, তাহলে সেটা global।
+
+let name = "Rahim";
+
+
+এটা যেকোনো জায়গা থেকে ব্যবহার করা যায়।
+
+Function Scope
+
+যদি function এর ভিতরে declare করা হয়, তাহলে সেটা শুধু ওই function এর ভিতরেই থাকবে।
 
 function test() {
-  console.log(globalVar); // "আমি global"
-}
-```
-
-#### B. Function Scope (ফাংশন স্কোপ)
-- **সংজ্ঞা**: function এর মধ্যে declare করা ভেরিয়েবল শুধুমাত্র সেই function এ accessible।
-- **অ্যাক্সেস**: function এর ভিতরে এবং nested functions এ।
-- **মনে রাখুন**: `var` ফাংশন-স্কোপড, কিন্তু `let` এবং `const` block-scoped।
-- **উদাহরণ**:
-```javascript
-function myFunction() {
-  let functionVar = "আমি function scope";
-  console.log(functionVar); // কাজ করে
+  let age = 20;
+  console.log(age);
 }
 
-console.log(functionVar); // ReferenceError - function scope এর বাইরে
-```
 
-#### C. Block Scope (ব্লক স্কোপ)
-- **সংজ্ঞা**: `if`, `for`, `while` এর মতো blocks এর মধ্যে declare করা ভেরিয়েবল শুধুমাত্র সেই block এ accessible।
-- **অ্যাক্সেস**: শুধুমাত্র block এর মধ্যে।
-- **মনে রাখুন**: `let` এবং `const` block-scoped, কিন্তু `var` নয়।
-- **উদাহরণ**:
-```javascript
+ফাংশনের বাইরে গেলে এটা পাওয়া যাবে না।
+
+Block Scope
+
+let আর const দিয়ে {} এর ভিতরে declare করলে সেটা block scope হয়।
+
 if (true) {
-  let blockVar = "আমি block scope";
-  console.log(blockVar); // কাজ করে
+  let city = "Dhaka";
 }
 
-console.log(blockVar); // ReferenceError
-```
 
-### Scope Chain (স্কোপ চেইন)
-- JavaScript inner scope থেকে outer scope এর ভিতর দিয়ে ভেরিয়েবল খোঁজে।
-- যদি inner scope এ ভেরিয়েবল না থাকে, তাহলে outer scope এ খোঁজে।
+এখানে city বাইরে ব্যবহার করলে error দেবে।
 
-```javascript
-const outer = "outer";
+সবশেষে একটা কথা —
+ভালো practice হলো var এড়িয়ে let আর const ব্যবহার করা, আর অপ্রয়োজনীয় global variable না রাখা।
 
-function test() {
-  const middle = "middle";
-  
-  function inner() {
-    const innerVar = "inner";
-    console.log(outer);     // "outer" - outer scope
-    console.log(middle);    // "middle" - parent function scope
-    console.log(innerVar);  // "inner" - own scope
-  }
-  
-  inner(); // সব এ কাজ করে
-}
-```
-
-### সুপারিশ
-- এড়িয়ে চলুন global variables যতটা সম্ভব।
-- `var` এর পরিবর্তে `let` এবং `const` ব্যবহার করুন।
-- Block scope ব্যবহার করুন variable isolation এর জন্য।
-
----
-
-**তৈরি করা হয়েছে**: SwiftCart Project  
-**তারিখ**: ফেব্রুয়ারি ২০২৬
+SwiftCart Project
+ফেব্রুয়ারি ২০২৬
