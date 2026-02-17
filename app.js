@@ -53,20 +53,34 @@ function renderTrending(products) {
 
   top3.forEach((prod) => {
     const card = document.createElement("div");
-    card.className = "card bg-stone-200 shadow-xl h-80 flex flex-col";
+    card.className = "card bg-gradient-to-b from-white to-stone-50 shadow-lg hover:shadow-2xl transition-shadow min-h-96 w-full flex flex-col overflow-hidden rounded-xl";
 
     card.innerHTML = `
-      <figure class="p-4 flex-shrink-0">
-        <img src="${prod.image}" class="h-40 w-80 w-full object-contain" />
-      </figure>
-      <div class="card-body flex-1 flex flex-col justify-between w-full">
-        <h2 class="card-title lg:text-2xl">${shortTitle(prod.title, 35)}</h2>
-        <div class="flex justify-between w-full border border-red-500">
-          <p class="font-semibold text-lg">$${prod.price}</p>
-          <p><i class="fa-regular fa-star text-lg"></i> ${prod.rating.rate}</p>
-        </div>
+  <figure class="p-3 sm:p-4 flex-shrink-0">
+    <img src="${prod.image}" class="h-32 sm:h-40 w-full object-contain" />
+  </figure>
+  <div class="px-3 sm:px-4 py-2 sm:py-3 flex-1 flex flex-col justify-between">
+    <div class="flex justify-between items-center w-full gap-2">
+      <span class="badge badge-primary font-semibold text-xs sm:text-sm uppercase tracking-wider">\$${prod.category}</span>
+      <p class="flex items-center gap-1 font-medium text-xs sm:text-sm">
+        <i class="fa-solid fa-star text-yellow-400"></i> 
+        <span class="font-semibold">${prod.rating.rate}</span>
+        <span class="text-gray-500">(${prod.rating.count})</span>
+      </p>
+    </div>
+    <h2 class="text-base sm:text-lg font-semibold leading-snug mt-2 text-gray-800">${shortTitle(prod.title, 35)}</h2>
+    <div class="flex justify-between items-center w-full mt-2">
+      <p class="font-bold text-xl sm:text-2xl text-black">\$${prod.price}</p>
+    </div>
+    <div class="border-t border-gray-300 my-2 sm:my-3"></div>
+    <div class="flex gap-2 w-full">
+        <button class="btn btn-sm sm:btn-md flex-1 btn-outline font-medium text-xs sm:text-sm hover:bg-gray-200 transition-all" onclick="showDetails(${prod.id})"><i class="fa-regular fa-eye"></i><span class="hidden sm:inline">Details</span></button>
+          <button class="btn btn-sm sm:btn-md flex-1 bg-purple-600 hover:bg-purple-700 text-white border-none font-medium text-xs sm:text-sm transition-all" onclick="addToCart(${prod.id})">
+            <i class="fa-solid fa-cart-shopping"></i><span class="hidden sm:inline">Add</span>
+          </button>
       </div>
-    `;
+  </div>
+`;
 
     trendingEl.appendChild(card);
   });
@@ -77,26 +91,31 @@ function renderProducts(products) {
 
   products.forEach((prod) => {
     const card = document.createElement("div");
-    card.className = "card bg-base-200 shadow";
+    card.className = "card bg-gradient-to-b from-white to-stone-50 shadow-lg hover:shadow-2xl transition-shadow min-h-96 w-full flex flex-col overflow-hidden rounded-xl";
 
     card.innerHTML = `
-      <figure class="p-4">
-        <img src="${prod.image}" class="h-40 w-full object-contain" />
+      <figure class="p-3 sm:p-4 flex-shrink-0">
+        <img src="${prod.image}" class="h-32 sm:h-40 w-full object-contain" />
       </figure>
-
-      <div class="card-body">
-        <span class="badge badge-outline">${prod.category}</span>
-
-        <h2 class="card-title text-sm" title="${prod.title}">
-          ${shortTitle(prod.title, 40)}
-        </h2>
-
-        <p class="font-semibold">$${prod.price}</p>
-        <p><i class="fa-regular fa-star"></i> ${prod.rating.rate} (${prod.rating.count})</p>
-
-        <div class="card-actions justify-between">
-          <button class="btn btn-sm" onclick="showDetails(${prod.id})"><i class="fa-regular fa-eye"></i>Details</button>
-          <button class="btn btn-sm btn-primary" onclick="addToCart(${prod.id})">Add</button>
+      <div class="px-3 sm:px-4 py-2 sm:py-3 flex-1 flex flex-col justify-between">
+        <div class="flex justify-between items-center w-full gap-2">
+          <span class="badge badge-primary font-semibold text-xs sm:text-sm uppercase tracking-wider">#${prod.category}</span>
+          <p class="flex items-center gap-1 font-medium text-xs sm:text-sm">
+            <i class="fa-solid fa-star text-yellow-400"></i> 
+            <span class="font-semibold">${prod.rating.rate}</span>
+            <span class="text-gray-500">(${prod.rating.count})</span>
+          </p>
+        </div>
+        <h2 class="text-base sm:text-lg font-semibold leading-snug mt-2 text-gray-800">${shortTitle(prod.title, 40)}</h2>
+        <div class="flex justify-between items-center w-full mt-2">
+          <p class="font-bold text-xl sm:text-2xl text-black">$${prod.price}</p>
+        </div>
+        <div class="border-t border-gray-300 my-2 sm:my-3"></div>
+        <div class="flex gap-2 w-full">
+          <button class="btn btn-sm sm:btn-md flex-1 btn-outline font-medium text-xs sm:text-sm hover:bg-gray-200 transition-all" onclick="showDetails(${prod.id})"><i class="fa-regular fa-eye"></i><span class="hidden sm:inline">Details</span></button>
+          <button class="btn btn-sm sm:btn-md flex-1 bg-purple-600 hover:bg-purple-700 text-white border-none font-medium text-xs sm:text-sm transition-all" onclick="addToCart(${prod.id})">
+            <i class="fa-solid fa-cart-shopping"></i><span class="hidden sm:inline">Add</span>
+          </button>
         </div>
       </div>
     `;
@@ -105,21 +124,47 @@ function renderProducts(products) {
   });
 }
 
+let selectedCategory = "all";
+
 function renderCategories(categories) {
   categoryEl.innerHTML = "";
+  categoryEl.className = "flex flex-wrap gap-3 p-4";
 
   const allBtn = document.createElement("button");
-  allBtn.className = "btn btn-sm btn-primary";
+  allBtn.className = "btn btn-md btn-primary text-base font-semibold shadow-lg transition-all duration-300 hover:shadow-xl";
   allBtn.textContent = "All";
-  allBtn.onclick = () => loadProducts("all");
+  allBtn.id = "cat-all";
+  allBtn.onclick = () => {
+    selectedCategory = "all";
+    loadProducts("all");
+    updateCategoryButtons();
+  };
   categoryEl.appendChild(allBtn);
 
   categories.forEach((cat) => {
     const btn = document.createElement("button");
-    btn.className = "btn btn-sm btn-outline";
+    btn.className = "btn btn-md btn-outline text-base font-semibold shadow-md transition-all duration-300 hover:shadow-lg capitalize";
     btn.textContent = cat;
-    btn.onclick = () => loadProducts(cat);
+    btn.id = `cat-${cat}`;
+    btn.onclick = () => {
+      selectedCategory = cat;
+      loadProducts(cat);
+      updateCategoryButtons();
+    };
     categoryEl.appendChild(btn);
+  });
+}
+
+function updateCategoryButtons() {
+  const buttons = categoryEl.querySelectorAll("button");
+  buttons.forEach((btn) => {
+    if (btn.id === `cat-${selectedCategory}` || (selectedCategory === "all" && btn.id === "cat-all")) {
+      btn.classList.remove("btn-outline");
+      btn.classList.add("btn-primary");
+    } else {
+      btn.classList.remove("btn-primary");
+      btn.classList.add("btn-outline");
+    }
   });
 }
 
@@ -148,7 +193,7 @@ async function loadProducts(category) {
 }
 
 async function showDetails(id) {
-  const product = await fetchJSON(`${productID}`);
+  const product = await fetchJSON(`${API}/products/${id}`);
   currentModalProduct = product;
 
   modalTitle.textContent = product.title;
@@ -270,17 +315,18 @@ function goHome() {
   const productsSection = document.getElementById("products");
   const whyChooseUsSection = document.getElementById("whyChooseUs");
   const trendingSection = document.getElementById("trendingSection");
-  
+
   heroSection.classList.remove("hidden");
   whyChooseUsSection.classList.remove("hidden");
   trendingSection.classList.remove("hidden");
-  
+
   productsSection.classList.add("hidden");
 
   heroSection.scrollIntoView({ behavior: "smooth" });
 }
 
-window.goHome = goHome;async function init() {
+window.goHome = goHome;
+async function init() {
   showLoader();
 
   allProducts = await fetchJSON(`${API}/products`);

@@ -45,10 +45,10 @@
 
         <div class="navbar-center hidden lg:flex">
           <ul class="menu menu-horizontal px-1 gap-5">
-            <li><button class="text-purple-800 text-xl font-bold btn btn-primary hover:bg-gray-300" onclick="goHome()">Home</button></li>
-            <li><button class="text-xl font-semi-bold btn btn-primary hover:bg-purple-600" onclick="showAllProducts()">Products</button></li>
-            <li><button class="text-xl font-semi-bold btn btn-primary hover:bg-purple-600">About</button></li>
-            <li><button class="text-xl font-semi-bold btn btn-primary hover:bg-purple-600">Contact</button></li>
+            <li><button class="text-purple-800 text-xl font-bold btn btn-primary hover:bg-gray-300 px-4" onclick="goHome()">Home</button></li>
+            <li><button class="text-xl font-bold btn btn-primary hover:bg-purple-500 px-4" onclick="showAllProducts()">Products</button></li>
+            <li><button class="text-xl font-bold btn btn-primary hover:bg-purple-500 px-4">About</button></li>
+            <li><button class="text-xl font-bold btn btn-primary hover:bg-purple-500 px-4">Contact</button></li>
           </ul>
         </div>
 
@@ -361,9 +361,9 @@
         </div>
         <div id="cartTotal" class="mt-6 pt-4 border-t text-lg font-bold"></div>
         <div class="modal-action">
-          <button id="cartClear" class="btn btn-outline">Clear Cart</button>
+          <button id="cartClear" class="btn btn-md btn-outline font-medium hover:bg-gray-200 transition-all">Clear Cart</button>
           <form method="dialog">
-            <button class="btn">Close</button>
+            <button class="btn btn-lg bg-purple-600 hover:bg-purple-700 text-white border-none font-semibold w-32 transition-all">Close</button>
           </form>
         </div>
       </div>
@@ -378,11 +378,11 @@
         <p><b>Rating:</b> <span id="modalRating"></span></p>
 
         <div class="modal-action">
-          <button id="modalAddToCart" class="btn btn-primary">
+          <button id="modalAddToCart" class="btn btn-md btn-outline font-medium hover:bg-gray-200 transition-all">
             Add to Cart
           </button>
           <form method="dialog">
-            <button class="btn">Close</button>
+            <button class="btn btn-lg bg-purple-600 hover:bg-purple-700 text-white border-none font-semibold w-32 transition-all">Close</button>
           </form>
         </div>
       </div>
