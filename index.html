@@ -38,30 +38,30 @@
     <div class="max-w-7xl mx-auto container">
       <div class="navbar bg-base-100 shadow-sm">
         <div class="navbar-start">
-          <a class="btn btn-ghost text-2xl font-bold text-purple-800"
-            >SwiftCart</a
+          <button class="btn btn-ghost text-2xl font-bold text-purple-800" onclick="goHome()"
+            >SwiftCart</button
           >
         </div>
 
         <div class="navbar-center hidden lg:flex">
-          <ul class="menu menu-horizontal px-1">
-            <li><a class="text-purple-800 text-xl font-bold">Home</a></li>
-            <li><a class="text-xl font-semi-bold">Products</a></li>
-            <li><a class="text-xl font-semi-bold">About</a></li>
-            <li><a class="text-xl font-semi-bold">Contact</a></li>
+          <ul class="menu menu-horizontal px-1 gap-5">
+            <li><button class="text-purple-800 text-xl font-bold btn btn-primary hover:bg-gray-300" onclick="goHome()">Home</button></li>
+            <li><button class="text-xl font-semi-bold btn btn-primary hover:bg-purple-600" onclick="showAllProducts()">Products</button></li>
+            <li><button class="text-xl font-semi-bold btn btn-primary hover:bg-purple-600">About</button></li>
+            <li><button class="text-xl font-semi-bold btn btn-primary hover:bg-purple-600">Contact</button></li>
           </ul>
         </div>
 
         <div class="navbar-end">
+          <button class="btn relative" onclick="openCartModal()">
+            <i class="fa-solid fa-cart-shopping text-xl lg:text-2xl"></i>
+            <span
+              id="cartCount"
+              class="badge badge-primary badge-sm absolute -top-2 -right-2"
+              >0</span
+            >
+          </button>
           <div class="dropdown dropdown-end">
-            <a class="btn">
-              <i class="fa-solid fa-cart-shopping text-xl lg:text-2xl"></i>
-              <span
-                id="cartCount"
-                class="badge badge-primary badge-sm absolute -top-2 -right-2"
-                >0</span
-              >
-            </a>
             <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -83,10 +83,12 @@
               tabindex="-1"
               class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
-              <li><a class="text-purple-800 text-xl font-bold">Home</a></li>
-              <li><a class="text-xl font-semi-bold">Products</a></li>
-              <li><a class="text-xl font-semi-bold">About</a></li>
-              <li><a class="text-xl font-semi-bold">Contact</a></li>
+              <li>
+                <button class="text-purple-800 text-xl font-bold" onclick="goHome()">Home</button>
+              </li>
+              <li><button class="text-xl font-semi-bold" onclick="showAllProducts()">Products</button></li>
+              <li><button class="text-xl font-semi-bold">About</button></li>
+              <li><button class="text-xl font-semi-bold">Contact</button></li>
             </ul>
           </div>
         </div>
@@ -95,7 +97,9 @@
 
     <section
       class="hero min-h-[70vh] relative"
-      style="background-image: url(&quot;./assets/banner-image.png&quot;)"
+      style="
+        background-image: url(&quot;https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&h=800&fit=crop&q=80&quot;);
+      "
     >
       <div
         class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-70"
@@ -110,21 +114,26 @@
             Discover the latest trends in fashion, electronics and more. Shop
             with confidence and style at SwiftCart.
           </p>
-          <button class="btn bg-purple-700 hover:bg-purple-800 border-none text-white lg:text-xl px-7 py-6" onclick="showAllProducts()"
-            >Shop Now</button
+          <button
+            class="btn bg-purple-700 hover:bg-purple-800 border-none text-white lg:text-xl px-7 py-6"
+            onclick="showAllProducts()"
           >
+            Shop Now
+          </button>
         </div>
       </div>
     </section>
 
-    <section class="py-16">
+    <section class="py-16" id="whyChooseUs">
       <div class="max-w-7xl mx-auto px-6">
         <h2 class="text-4xl font-bold text-center mb-5">Why Choose Us</h2>
         <p class="text-center text-2xl text-zinc-600">
           We provide the best shopping experience with top-notch services.
         </p>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-5 px-4 justify-items-start">
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-5 px-4 justify-items-start"
+        >
           <div class="card bg-slate-200 shadow-xl shadow">
             <div class="card-body flex items-start gap-4">
               <div class="text-2xl text-primary">
@@ -136,7 +145,7 @@
                 </h3>
                 <p class="text-lg text-zinc-600">
                   Get your orders delivered to your doorstep quickly and
-                  efficientlt.
+                  efficiently.
                 </p>
               </div>
             </div>
@@ -193,9 +202,12 @@
         </div>
       </div>
     </section>
-    <section class="px-6 pb-16 max-w-7xl mx-auto">
+    <section class="px-6 pb-16 max-w-7xl mx-auto" id="trendingSection">
       <h2 class="text-2xl font-bold mb-6">Trending Now</h2>
-      <div id="trending" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center"></div>
+      <div
+        id="trending"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-start"
+      ></div>
     </section>
     <section id="products" class="card px-6 pb-16 max-w-7xl mx-auto hidden">
       <h2 class="text-3xl font-bold text-center mb-6">Our Products</h2>
@@ -206,7 +218,10 @@
         <span class="loading loading-spinner loading-lg text-primary"></span>
       </div>
 
-      <div id="product" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-start"></div>
+      <div
+        id="product"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-start"
+      ></div>
     </section>
     <footer class="bg-[#1a2332] text-gray-300 mt-16">
       <div class="max-w-7xl mx-auto px-6 py-12">
@@ -228,22 +243,22 @@
             <nav class="flex flex-col gap-2">
               <a
                 class="text-gray-400 hover:text-white transition-colors"
-                href="#home"
+                href=""
                 >Home</a
               >
               <a
                 class="text-gray-400 hover:text-white transition-colors"
-                href="#products"
+                href=""
                 >Products</a
               >
               <a
                 class="text-gray-400 hover:text-white transition-colors"
-                href="#about"
+                href=""
                 >About</a
               >
               <a
                 class="text-gray-400 hover:text-white transition-colors"
-                href="#contact"
+                href=""
                 >Contact</a
               >
             </nav>
@@ -258,22 +273,22 @@
             <nav class="flex flex-col gap-2">
               <a
                 class="text-gray-400 hover:text-white transition-colors"
-                href="#faq"
+                href=""
                 >FAQ</a
               >
               <a
                 class="text-gray-400 hover:text-white transition-colors"
-                href="#shipping"
+                href=""
                 >Shipping</a
               >
               <a
                 class="text-gray-400 hover:text-white transition-colors"
-                href="#returns"
+                href=""
                 >Returns</a
               >
               <a
                 class="text-gray-400 hover:text-white transition-colors"
-                href="#privacy"
+                href=""
                 >Privacy Policy</a
               >
             </nav>
@@ -294,11 +309,11 @@
                 id="newsletterEmail"
                 type="email"
                 placeholder="Enter your email"
-                class="input input-bordered flex-1 bg-white/10 border-gray-600 text-white placeholder-gray-500 focus:border-indigo-500"
+                class="input input-bordered flex-1 bg-white/10 border-gray-600 text-white placeholder-gray-500 focus:border-indigo-500 px-5 rounded-lg"
                 required
               />
               <button
-                class="btn btn-primary bg-indigo-600 hover:bg-indigo-700 border-none text-white"
+                class="btn btn-primary bg-indigo-600 hover:bg-indigo-700 border-none text-white px-3 rounded-lg"
               >
                 Subscribe
               </button>
@@ -336,6 +351,23 @@
         </div>
       </div>
     </footer>
+
+    <dialog id="cartModal" class="modal">
+      <div class="modal-box w-full max-w-2xl">
+        <h3 class="font-bold text-lg mb-4">Shopping Cart</h3>
+        <div id="cartItems" class="space-y-4"></div>
+        <div id="cartEmpty" class="text-center text-gray-500 py-8">
+          Your cart is empty
+        </div>
+        <div id="cartTotal" class="mt-6 pt-4 border-t text-lg font-bold"></div>
+        <div class="modal-action">
+          <button id="cartClear" class="btn btn-outline">Clear Cart</button>
+          <form method="dialog">
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
 
     <dialog id="productModal" class="modal">
       <div class="modal-box">
