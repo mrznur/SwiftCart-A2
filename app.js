@@ -64,19 +64,19 @@ function renderTrending(products) {
       <span class="badge badge-primary font-semibold text-xs sm:text-sm uppercase tracking-wider">${prod.category}</span>
       <p class="flex items-center gap-1 font-medium text-xs sm:text-sm">
         <i class="fa-solid fa-star text-yellow-400"></i> 
-        <span class="font-semibold">${prod.rating.rate}</span>
+        <span class="font-semibold">$${prod.rating.rate}</span>
         <span class="text-gray-500">(${prod.rating.count})</span>
       </p>
     </div>
     <h2 class="text-base sm:text-lg font-semibold leading-snug mt-2 text-gray-800">${shortTitle(prod.title, 35)}</h2>
     <div class="flex justify-between items-center w-full mt-2">
-      <p class="font-bold text-xl sm:text-2xl text-black">${prod.price}</p>
+      <p class="font-bold text-xl sm:text-2xl text-black">$${prod.price}</p>
     </div>
     <div class="border-t border-gray-300 my-2 sm:my-3"></div>
     <div class="flex gap-2 w-full">
-        <button class="btn btn-sm sm:btn-md flex-1 btn-outline font-medium text-xs sm:text-sm hover:bg-gray-200 transition-all" onclick="showDetails(${prod.id})"><i class="fa-regular fa-eye"></i><span class="hidden sm:inline">Details</span></button>
+        <button class="btn btn-sm sm:btn-md flex-1 btn-outline font-medium text-xs sm:text-sm hover:bg-gray-200 transition-all" onclick="showDetails(${prod.id})"><i class="fa-regular fa-eye"></i> Details</button>
           <button class="btn btn-sm sm:btn-md flex-1 bg-purple-600 hover:bg-purple-700 text-white border-none font-medium text-xs sm:text-sm transition-all" onclick="addToCart(${prod.id})">
-            <i class="fa-solid fa-cart-shopping"></i><span class="hidden sm:inline">Add</span>
+            <i class="fa-solid fa-cart-shopping"></i> Add
           </button>
       </div>
   </div>
@@ -112,9 +112,9 @@ function renderProducts(products) {
         </div>
         <div class="border-t border-gray-300 my-2 sm:my-3"></div>
         <div class="flex gap-2 w-full">
-          <button class="btn btn-sm sm:btn-md flex-1 btn-outline font-medium text-xs sm:text-sm hover:bg-gray-200 transition-all" onclick="showDetails(${prod.id})"><i class="fa-regular fa-eye"></i><span class="hidden sm:inline">Details</span></button>
+          <button class="btn btn-sm sm:btn-md flex-1 btn-outline font-medium text-xs sm:text-sm hover:bg-gray-200 transition-all" onclick="showDetails(${prod.id})"><i class="fa-regular fa-eye"></i> Details</button>
           <button class="btn btn-sm sm:btn-md flex-1 bg-purple-600 hover:bg-purple-700 text-white border-none font-medium text-xs sm:text-sm transition-all" onclick="addToCart(${prod.id})">
-            <i class="fa-solid fa-cart-shopping"></i><span class="hidden sm:inline">Add</span>
+            <i class="fa-solid fa-cart-shopping"></i> Add
           </button>
         </div>
       </div>
@@ -159,11 +159,11 @@ function updateCategoryButtons() {
   const buttons = categoryEl.querySelectorAll("button");
   buttons.forEach((btn) => {
     if (btn.id === `cat-${selectedCategory}` || (selectedCategory === "all" && btn.id === "cat-all")) {
-      btn.classList.remove("btn-outline");
-      btn.classList.add("btn-primary");
+      btn.classList.remove("btn-outline", "shadow-md");
+      btn.classList.add("btn-primary", "bg-purple-600", "hover:bg-purple-700", "text-white", "shadow-lg","px-3");
     } else {
-      btn.classList.remove("btn-primary");
-      btn.classList.add("btn-outline");
+      btn.classList.remove("btn-primary", "bg-purple-600", "hover:bg-purple-700", "text-white", "shadow-lg");
+      btn.classList.add("btn-outline", "shadow-md");
     }
   });
 }
