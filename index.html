@@ -23,25 +23,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Exo+2:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              arimo: ["Arimo", "sans-serif"],
-              exo: ['"Exo 2"', "sans-serif"],
-              work: ['"Work Sans"', "sans-serif"],
-            },
-          },
-        },
-      };
-    </script>
+    <style type="text/tailwindcss">
+      @theme {
+        --font-arimo: "Arimo", sans-serif;
+        --font-montserrat: "Montserrat", sans-serif;
+        --font-work: "Work Sans", sans-serif;
+      }
+    </style>
   </head>
-  <body class="bg-base-100 font-arimo">
-    <div class="mx-auto container">
+  <body class="bg-base-100 font-montserrat">
+    <div class="max-w-7xl mx-auto container">
       <div class="navbar bg-base-100 shadow-sm">
         <div class="navbar-start">
           <a class="btn btn-ghost text-2xl font-bold text-purple-800"
@@ -96,13 +90,13 @@
 
     <section
       class="hero min-h-[70vh] relative"
-      style="background-image: url('./assets/banner-image.png')"
+      style="background-image: url(&quot;./assets/banner-image.png&quot;)"
     >
       <div
         class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-70"
       ></div>
 
-      <div class="hero-overlay bg-black bg-opacity-40"></div>
+      <div class="hero-overlay bg-black bg-opacity-20"></div>
 
       <div class="hero-content text-white w-full">
         <div class="max-w-8xl w-full text-left pl-8 lg:pl-16">
@@ -117,5 +111,255 @@
         </div>
       </div>
     </section>
+
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-5">Why Choose Us</h2>
+        <p class="text-center text-2xl text-zinc-600">
+          We provide the best shopping experience with top-notch services.
+        </p>
+
+        <div class="grid md:grid-cols-4 gap-6 my-5 px-4">
+          <div class="card bg-slate-200 shadow">
+            <div class="card-body flex items-start gap-4">
+              <div class="text-2xl text-primary">
+                <i class="fa-solid fa-truck"></i>
+              </div>
+              <div>
+                <h3 class="lg:text-3xl text-2xl font-semi-bold lg:my-5">
+                  Fast Delivery
+                </h3>
+                <p class="text-lg text-zinc-600">
+                  Get your orders delivered to your doorstep quickly and
+                  efficientlt.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card bg-slate-200 shadow px-4">
+            <div class="card-body flex items-start gap-4">
+              <div class="text-2xl text-primary">
+                <i class="fa-solid fa-headset"></i>
+              </div>
+              <div>
+                <h3 class="lg:text-3xl text-2xl font-semi-bold lg:my-5">
+                  24/7 Support
+                </h3>
+                <p class="text-lg text-zinc-600">
+                  Our support team is available around the clock to assist you.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card bg-slate-200 shadow">
+            <div class="card-body flex items-start gap-4">
+              <div class="text-2xl text-primary">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+              <div>
+                <h3 class="lg:text-3xl text-2xl font-semi-bold lg:my-5">
+                  Secure Payment
+                </h3>
+                <p class="text-lg text-zinc-600">
+                  Experience safe and secure transactions with our encrypted
+                  payment systems.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card bg-slate-200 shadow px-4">
+            <div class="card-body flex items-start gap-4">
+              <div class="text-2xl text-primary">
+                <i class="fa-solid fa-rotate-left"></i>
+              </div>
+              <div>
+                <h3 class="lg:text-3xl text-2xl font-semi-bold lg:my-5">
+                  Easy Returns
+                </h3>
+                <p class="text-lg text-zinc-600">
+                  Not satisfied? Return your products easily within 30 days.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="px-6 pb-16 max-w-7xl mx-auto">
+      <h2 class="text-2xl font-bold mb-6">Trending Now</h2>
+      <div id="trendingGrid" class="grid md:grid-cols-3 gap-6"></div>
+    </section>
+    <section id="products" class="px-6 pb-16">
+      <h2 class="text-3xl font-bold text-center mb-6">Our Products</h2>
+
+      <div
+        id="categoryWrap"
+        class="flex flex-wrap justify-center gap-3 mb-6"
+      ></div>
+
+      <div id="loader" class="text-center hidden">
+        <span class="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+
+      <div id="productGrid" class="grid md:grid-cols-4 gap-6"></div>
+    </section>
+    <footer class="bg-[#1a2332] text-gray-300 mt-16">
+      <div class="max-w-7xl mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Brand Section -->
+          <div>
+            <h2 class="text-2xl font-bold text-indigo-400 mb-4">SwiftCart</h2>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Your one-stop shop for all your fashion and lifestyle needs.
+              Quality products, fast delivery, and excellent support.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h6
+              class="text-gray-200 font-semibold mb-4 uppercase tracking-wider text-sm"
+            >
+              Quick Links
+            </h6>
+            <nav class="flex flex-col gap-2">
+              <a
+                class="text-gray-400 hover:text-white transition-colors"
+                href="#home"
+                >Home</a
+              >
+              <a
+                class="text-gray-400 hover:text-white transition-colors"
+                href="#products"
+                >Products</a
+              >
+              <a
+                class="text-gray-400 hover:text-white transition-colors"
+                href="#about"
+                >About</a
+              >
+              <a
+                class="text-gray-400 hover:text-white transition-colors"
+                href="#contact"
+                >Contact</a
+              >
+            </nav>
+          </div>
+
+          <!-- Support -->
+          <div>
+            <h6
+              class="text-gray-200 font-semibold mb-4 uppercase tracking-wider text-sm"
+            >
+              Support
+            </h6>
+            <nav class="flex flex-col gap-2">
+              <a
+                class="text-gray-400 hover:text-white transition-colors"
+                href="#faq"
+                >FAQ</a
+              >
+              <a
+                class="text-gray-400 hover:text-white transition-colors"
+                href="#shipping"
+                >Shipping</a
+              >
+              <a
+                class="text-gray-400 hover:text-white transition-colors"
+                href="#returns"
+                >Returns</a
+              >
+              <a
+                class="text-gray-400 hover:text-white transition-colors"
+                href="#privacy"
+                >Privacy Policy</a
+              >
+            </nav>
+          </div>
+
+          <!-- Newsletter -->
+          <div>
+            <h6
+              class="text-gray-200 font-semibold mb-4 uppercase tracking-wider text-sm"
+            >
+              Subscribe to our Newsletter
+            </h6>
+            <p class="text-gray-400 text-sm mb-4">
+              The latest news, articles, and resources, sent to your inbox
+              weekly.
+            </p>
+            <form id="newsletterForm" class="flex gap-2">
+              <input
+                id="newsletterEmail"
+                type="email"
+                placeholder="Enter your email"
+                class="input input-bordered flex-1 bg-white/10 border-gray-600 text-white placeholder-gray-500 focus:border-indigo-500"
+                required
+              />
+              <button
+                class="btn btn-primary bg-indigo-600 hover:bg-indigo-700 border-none text-white"
+              >
+                Subscribe
+              </button>
+            </form>
+            <p id="newsletterMsg" class="text-sm mt-2"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Section -->
+      <div class="border-t border-gray-700 bg-[#151d2b]">
+        <div
+          class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4"
+        >
+          <p class="text-gray-400 text-sm">
+            © 2025 SwiftCart, Inc. All rights reserved.
+          </p>
+
+          <!-- Social Icons -->
+          <div class="flex gap-4 text-gray-400">
+            <a href="#" class="hover:text-white transition-colors">
+              <i class="fa-brands fa-facebook text-xl"></i>
+            </a>
+            <a href="#" class="hover:text-white transition-colors">
+              <i class="fa-brands fa-twitter text-xl"></i>
+            </a>
+            <a href="#" class="hover:text-white transition-colors">
+              <i class="fa-brands fa-instagram text-xl"></i>
+            </a>
+            <a href="#" class="hover:text-white transition-colors">
+              <i class="fa-brands fa-linkedin text-xl"></i>
+            </a>
+            <a href="#" class="hover:text-white transition-colors">
+              <i class="fa-solid fa-envelope text-xl"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <dialog id="productModal" class="modal">
+      <div class="modal-box">
+        <h3 id="modalTitle" class="font-bold text-lg"></h3>
+        <img id="modalImg" class="w-40 mx-auto my-4" />
+        <p id="modalDesc"></p>
+        <p class="mt-2"><b>Price:</b> <span id="modalPrice"></span></p>
+        <p><b>Rating:</b> <span id="modalRating"></span></p>
+
+        <div class="modal-action">
+          <button id="modalAddToCart" class="btn btn-primary">
+            Add to Cart
+          </button>
+          <form method="dialog">
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="app.js"></script>
   </body>
 </html>
